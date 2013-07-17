@@ -1,0 +1,3 @@
+ignoredir/
+log/*.out
+log/*.log
