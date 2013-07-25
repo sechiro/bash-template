@@ -1,5 +1,5 @@
 #!/bin/bash
-# Dependency: simple_logger.sh
+# require: simple_logger.sh
 # -----------------------
 # File check functions
 # -----------------------

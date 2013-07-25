@@ -52,7 +52,10 @@ _set_log_level
 #
 _output_log(){
     if [ $LINE_LOG = 1 ];then
-        echo "$_logger_date $_log_tag [`basename $0`: LineNo: ${BASH_LINENO[0]}] $@" 1>&2
+        # 元のスクリプトのLINENOは、${BASH_LINENO[]}の最後の1つ前の要素に格納される。
+        # ${BASH_LINENO[]}には関数呼び出しなどがある度に、実行行の行番号が先頭に追加される。
+        local _line_index=$(( ${#BASH_LINENO[@]} - 2 ))
+        echo "$_logger_date $_log_tag [`basename $0`: LineNo: ${BASH_LINENO[$_line_index]}] $@" 1>&2
     else
         echo "$_logger_date $_log_tag $@" 1>&2
     fi
@@ -88,6 +91,7 @@ logger_debug(){
     _log_tag="DEBUG"
     if [[ $_log_level -ge 4 ]]; then
         _logger_set_date
+        _output_log "$@"
         _output_log "$@"
     fi
 }

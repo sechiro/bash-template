@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -ue
 LANG=C
 
@@ -61,3 +61,7 @@ logger_info "てすと"
 tmp_readable=`is_readable /tmp`
 echo $tmp_readable
 
+set +e
+ls /temp
+
+logger_info "Script Done."
